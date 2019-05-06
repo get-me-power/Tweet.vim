@@ -1,6 +1,6 @@
 set rtp+=webapi-vim
 
-function! Tweet#Post(status) abort
+function! Tweet#Post() abort
     let ctx = {}
     let configfile = expand('~/.twitter-vim')
     if filereadable(configfile)
@@ -36,6 +36,19 @@ function! Tweet#Post(status) abort
     endif
 
     let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
-    let ret = webapi#oauth#post(post_url, ctx, {}, {'status': a:status})
+    let ret = webapi#oauth#post(post_url, ctx, {}, {'status': s:returnTweet()})
     return ret
+endfunction
+
+function Tweet#Edit()
+    let inputfile = "$HOME/test.txt"
+    execute ":new " . escape(inputfile, ' ')
+endfunction
+
+function s:returnTweet()
+    let inputfile = (expand('$HOME/test.txt'))
+    for line in readfile(inputfile)
+        echo line
+    endfor
+    return line
 endfunction
