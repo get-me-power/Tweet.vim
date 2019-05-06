@@ -39,5 +39,3 @@ function! Tweet#Post(status) abort
     let ret = webapi#oauth#post(post_url, ctx, {}, {'status': a:status})
     return ret
 endfunction
-
-

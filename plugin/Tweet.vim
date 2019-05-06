@@ -1,1 +1,1 @@
-command! -nargs=+ Tweet call Tweet#Post('<f-args>')
+command! -nargs=1 Tweet call Tweet#Post(<f-args>)
