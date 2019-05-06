@@ -46,9 +46,12 @@ function Tweet#Edit()
 endfunction
 
 function s:returnTweet()
+    let list = []
     let inputfile = (expand('$HOME/test.txt'))
     for line in readfile(inputfile)
-        echo line
+        "echo line"
+        call add(list, line)
     endfor
-    return line
+    echo join(list, "\n") . "\n"
+    return join(list, "\n")
 endfunction
