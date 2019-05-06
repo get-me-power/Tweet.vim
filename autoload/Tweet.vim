@@ -1,3 +1,6 @@
+let s:save_cpo = &cpo
+set cpo&vim
+
 set rtp+=webapi-vim
 
 function! Tweet#Post() abort
@@ -55,3 +58,6 @@ function s:returnTweet()
     echo join(list, "\n") . "\n"
     return join(list, "\n")
 endfunction
+
+let &cpo = s:save_cpo
+unlet s:save_cpo
