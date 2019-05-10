@@ -9,9 +9,9 @@ function! Tweet#Post() abort
     return ret
 endfunction
 
-function! Tweet#Look() abort
+function! Tweet#Look(screen_name, count) abort
     let get_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
-    let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name':"get_me_power","count":200})
+    let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name': a:screen_name,"count": a:count})
     let dict = webapi#json#decode(ret.content)
     for item in dict
         echo item["text"]

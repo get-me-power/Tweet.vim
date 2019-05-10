@@ -7,7 +7,8 @@ let s:save_cpo = &cpo
 set cpo&vim
 command! -nargs=0 Tweet call Tweet#Post()
 command! -nargs=0 TweetEdit call Tweet#Edit()
-command! -nargs=0 TweetLook call Tweet#Look()
+command! -nargs=* TweetLook call Tweet#Look(<f-args>)
+
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
