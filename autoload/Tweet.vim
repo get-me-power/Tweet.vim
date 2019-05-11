@@ -39,6 +39,14 @@ function Tweet#Edit()
     execute ":new " . escape(inputfile, ' ')
 endfunction
 
+function Tweet#PostFavo()
+    let favo_url = "https://api.twitter.com/1.1/favorites/create.json"
+    let tweet_id = input('id :' )
+    let ret = webapi#oauth#post(favo_url, s:Oauth(), {} ,{'id':tweet_id})
+    echo ret
+    return ret
+endfunction
+
 function s:returnTweet()
     let list = []
     let inputfile = (expand('$HOME/test.txt'))
