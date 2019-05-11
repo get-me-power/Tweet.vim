@@ -17,14 +17,20 @@ function! Tweet#Reply() abort
 endfunction
 
 function! Tweet#Look(screen_name, count) abort
+    call delete(expand("$HOME/TL.txt"))
     let get_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
     let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name': a:screen_name,"count": a:count})
     let dict = webapi#json#decode(ret.content)
+    let TLList = []
+    let outputfile = expand("$HOME/TL.txt")
+
     for item in dict
-        echo item['text']
-        echo 'Twitter id '.item['id']
-        echo "\n"
+        call add(TLList, item['text'])
+        call add(TLList, item['id'])
+        call add(TLList, '')
     endfor
+    call writefile(TLList,  outputfile)
+    execute("vnew $HOME/TL.txt")
 endfunction
 
 
