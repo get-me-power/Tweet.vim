@@ -9,12 +9,20 @@ function! Tweet#Post() abort
     return ret
 endfunction
 
+function! Tweet#Reply() abort
+    let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
+    let tweet_id = input('id: ' )
+    let ret = webapi#oauth#post(post_url, s:Oauth(), {} ,{'in_reply_to_status_id':tweet_id, 'status':s:returnTweet()})
+    return ret
+endfunction
+
 function! Tweet#Look(screen_name, count) abort
     let get_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
     let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name': a:screen_name,"count": a:count})
     let dict = webapi#json#decode(ret.content)
     for item in dict
-        echo item["text"]
+        echo item['text']
+        echo 'Twitter id '.item['id']
         echo "\n"
     endfor
 endfunction
