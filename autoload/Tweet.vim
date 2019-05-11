@@ -33,6 +33,7 @@ function s:returnTweet()
         call add(list, line)
     endfor
     echo join(list, "\n") . "\n"
+    call delete(expand('$HOME/test.txt'))
     return join(list, "\n")
 endfunction
 
