@@ -27,8 +27,9 @@ Plug 'kazukazuinaina/Tweet.vim'
 **This plugin have three function.**
 
 - TweetEdit
-- Do Tweet
+- Tweet
 - Look User's tweet
+- Retweet
 
 If you want to write sentence to do tweet, do below's command.
 
@@ -42,8 +43,14 @@ You want to do tweet, you run below command.
 :Tweet
 ```
 
-You want to look user's tweet, you run below command.
+You want to look user's tweet and tweet id, you run below command.
 
 ```
 :TweetLook 'screenname' 'get Tweet count (maximum is 200)'
+```
+
+You want to do retweet, you run below command and input tweet id.
+
+```
+:RT
 ```
