@@ -33,6 +33,14 @@ function! Tweet#Look(screen_name, count) abort
     execute("vnew $HOME/TL.txt")
 endfunction
 
+function Tweet#Retweet()
+    let retweet_id = input('id :')
+    let post_url = 'https://api.twitter.com/1.1/statuses/retweet/'.retweet_id.'.json'
+    echo post_url
+    let  ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'id':retweet_id})
+    echo ret
+    return ret
+endfunction
 
 function Tweet#Edit()
     let inputfile = "$HOME/test.txt"
