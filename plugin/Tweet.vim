@@ -10,7 +10,7 @@ command! -nargs=0 TweetEdit call Tweet#Edit()
 command! -nargs=0 Reply call Tweet#Reply()
 command! -nargs=0 Favo call Tweet#PostFavo()
 command! -nargs=0 RT call Tweet#Retweet()
-command! -nargs=* TweetLook call Tweet#Look(<f-args>)
+command! -nargs=0 TweetLook call Tweet#Look()
 
 let &cpo = s:save_cpo
 unlet s:save_cpo

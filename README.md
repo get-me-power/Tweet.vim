@@ -54,3 +54,11 @@ You want to do retweet, you run below command and input tweet id.
 ```
 :RT
 ```
+
+** If you feel to spicy to write tweet id, you can copy and paste! **
+
+Please run this command after yank tweet id
+
+```
+<C-R>"
+```
