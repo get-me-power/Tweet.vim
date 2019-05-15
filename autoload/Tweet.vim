@@ -6,13 +6,24 @@ set rtp+=webapi-vim
 function! Tweet#Post() abort
     let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
     let ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'status': s:returnTweet()})
-    return ret
+    echo ''
+    if ret['status'] == 200
+        echo 'success!!'
+    else
+        echomsg 'error'
+    endif
 endfunction
 
 function! Tweet#Reply() abort
     let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
     let tweet_id = input('tweet_id: ' )
     let ret = webapi#oauth#post(post_url, s:Oauth(), {} ,{'in_reply_to_status_id':tweet_id, 'status':s:returnTweet()})
+    echo "\n"
+    if ret['status'] == 200
+        echomsg 'success!!'
+    else
+        echomsg 'error'
+    endif
     return ret
 endfunction
 
@@ -22,17 +33,21 @@ function! Tweet#Look() abort
     call delete(expand("$HOME/TL.txt"))
     let get_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
     let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name':screen_name,"count": l:count})
-    let dict = webapi#json#decode(ret.content)
-    let TLList = []
-    let outputfile = expand("$HOME/TL.txt")
+    if ret['status'] == 200
+        let dict = webapi#json#decode(ret.content)
+        let TLList = []
+        let outputfile = expand("$HOME/TL.txt")
 
-    for item in dict
-        call add(TLList, item['text'])
-        call add(TLList, item['id'])
-        call add(TLList, '')
-    endfor
-    call writefile(TLList,  outputfile)
-    execute("vnew $HOME/TL.txt")
+        for item in dict
+            call add(TLList, item['text'])
+            call add(TLList, item['id'])
+            call add(TLList, '')
+        endfor
+        call writefile(TLList,  outputfile)
+        execute("vnew $HOME/TL.txt")
+    else
+        echomsg 'error'
+    endif
 endfunction
 
 function Tweet#Retweet()
@@ -40,7 +55,11 @@ function Tweet#Retweet()
     let post_url = 'https://api.twitter.com/1.1/statuses/retweet/'.retweet_id.'.json'
     echo post_url
     let  ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'id':retweet_id})
-    echo ret
+    if ret['status'] == 200
+        echomsg 'success!!'
+    else
+        echomsg 'error'
+    endif
     return ret
 endfunction
 
@@ -53,7 +72,12 @@ function Tweet#PostFavo()
     let favo_url = "https://api.twitter.com/1.1/favorites/create.json"
     let tweet_id = input('id :' )
     let ret = webapi#oauth#post(favo_url, s:Oauth(), {} ,{'id':tweet_id})
-    echo ret
+    echo ''
+    if ret['status'] == 200
+        echomsg 'success!'
+    else
+        echomsg 'error!'
+    endif
     return ret
 endfunction
 
@@ -61,10 +85,8 @@ function s:returnTweet()
     let list = []
     let inputfile = (expand('$HOME/test.txt'))
     for line in readfile(inputfile)
-        "echo line"
         call add(list, line)
     endfor
-    echo join(list, "\n") . "\n"
     call delete(expand('$HOME/test.txt'))
     return join(list, "\n")
 endfunction
