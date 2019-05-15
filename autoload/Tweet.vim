@@ -11,15 +11,17 @@ endfunction
 
 function! Tweet#Reply() abort
     let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
-    let tweet_id = input('id: ' )
+    let tweet_id = input('tweet_id: ' )
     let ret = webapi#oauth#post(post_url, s:Oauth(), {} ,{'in_reply_to_status_id':tweet_id, 'status':s:returnTweet()})
     return ret
 endfunction
 
-function! Tweet#Look(screen_name, count) abort
+function! Tweet#Look() abort
+    let screen_name = input('screenname: ')
+    let l:count = input('count: ')
     call delete(expand("$HOME/TL.txt"))
     let get_url = 'https://api.twitter.com/1.1/statuses/user_timeline.json'
-    let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name': a:screen_name,"count": a:count})
+    let ret = webapi#oauth#get(get_url, s:Oauth(), {}, {'screen_name':screen_name,"count": l:count})
     let dict = webapi#json#decode(ret.content)
     let TLList = []
     let outputfile = expand("$HOME/TL.txt")
