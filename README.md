@@ -30,6 +30,7 @@ Plug 'kazukazuinaina/Tweet.vim'
 - Tweet
 - Look User's tweet
 - Retweet
+- Favo
 
 If you want to write sentence to do tweet, do below's command.
 
@@ -53,6 +54,12 @@ You want to do retweet, you run below command and input tweet id.
 
 ```
 :RT
+```
+
+You want to do favorite, you run below command and input tweet id
+
+```
+:Favo
 ```
 
 ** If you feel to spicy to write tweet id, you can copy and paste! **
