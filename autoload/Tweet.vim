@@ -20,7 +20,7 @@ function! Tweet#Reply() abort
     let ret = webapi#oauth#post(post_url, s:Oauth(), {} ,{'in_reply_to_status_id':tweet_id, 'status':s:returnTweet()})
     echo "\n"
     if ret['status'] == 200
-        echomsg 'success!!'
+        echo 'success!!'
     else
         echomsg 'error'
     endif
@@ -40,7 +40,7 @@ function! Tweet#Look() abort
 
         for item in dict
             call add(TLList, item['text'])
-            call add(TLList, item['id'])
+            call add(TLList, 'Tweet_id: '.item['id'])
             call add(TLList, '')
         endfor
         call writefile(TLList,  outputfile)
@@ -56,7 +56,7 @@ function Tweet#Retweet()
     echo post_url
     let  ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'id':retweet_id})
     if ret['status'] == 200
-        echomsg 'success!!'
+        echo 'success!!'
     else
         echomsg 'error'
     endif
@@ -74,7 +74,7 @@ function Tweet#PostFavo()
     let ret = webapi#oauth#post(favo_url, s:Oauth(), {} ,{'id':tweet_id})
     echo ''
     if ret['status'] == 200
-        echomsg 'success!'
+        echo 'success!'
     else
         echomsg 'error!'
     endif
