@@ -4,14 +4,19 @@ set cpo&vim
 set rtp+=webapi-vim
 
 function! Tweet#Post() abort
-    let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
-    let ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'status': s:returnTweet()})
-    echo ''
-    if ret['status'] == 200
-        echo 'success!!'
-    else
-        echomsg 'error'
-    endif
+    try
+        let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
+        let ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'status': s:returnTweet()})
+        echo ''
+        if ret['status'] == 200
+            echo "\n"
+            echo 'success!!'
+        else
+            echoerr 'error'
+        endif
+    catch /^Vim\%((\a\+)\)\=:E484:/
+        echo 'You must run TweetEdit command!!'
+    endtry
 endfunction
 
 function! Tweet#Reply() abort
@@ -20,9 +25,10 @@ function! Tweet#Reply() abort
     let ret = webapi#oauth#post(post_url, s:Oauth(), {} ,{'in_reply_to_status_id':tweet_id, 'status':s:returnTweet()})
     echo "\n"
     if ret['status'] == 200
+        echo "\n"
         echo 'success!!'
     else
-        echomsg 'error'
+        echoerr 'error'
     endif
     return ret
 endfunction
@@ -43,8 +49,7 @@ function! Tweet#Look() abort
             call add(TLList, 'Tweet_id: '.item['id'])
             call add(TLList, '')
         endfor
-        " call writefile(TLList,  outputfile)
-        " execute("vnew $HOME/TL.txt")
+        " open buffer
         call Tweet#buffer#new('TimeLine',TLList)
     else
         echomsg 'error'
@@ -57,9 +62,10 @@ function Tweet#Retweet()
     echo post_url
     let  ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'id':retweet_id})
     if ret['status'] == 200
+        echo "\n"
         echo 'success!!'
     else
-        echomsg 'error'
+        echoerr 'error'
     endif
     return ret
 endfunction
@@ -75,9 +81,10 @@ function Tweet#PostFavo()
     let ret = webapi#oauth#post(favo_url, s:Oauth(), {} ,{'id':tweet_id})
     echo ''
     if ret['status'] == 200
+        echo "\n"
         echo 'success!'
     else
-        echomsg 'error!'
+        echoerr 'error!'
     endif
     return ret
 endfunction
