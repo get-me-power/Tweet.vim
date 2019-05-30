@@ -43,8 +43,9 @@ function! Tweet#Look() abort
             call add(TLList, 'Tweet_id: '.item['id'])
             call add(TLList, '')
         endfor
-        call writefile(TLList,  outputfile)
-        execute("vnew $HOME/TL.txt")
+        " call writefile(TLList,  outputfile)
+        " execute("vnew $HOME/TL.txt")
+        call Tweet#buffer#new('TimeLine',TLList)
     else
         echomsg 'error'
     endif
