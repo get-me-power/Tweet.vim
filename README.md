@@ -24,7 +24,7 @@ Plug 'kazukazuinaina/Tweet.vim'
 
 ## Usage
 
-**This plugin have three function.**
+**This plugin have five functions.**
 
 - TweetEdit
 - Tweet
@@ -44,10 +44,10 @@ You want to do tweet, you run below command.
 :Tweet
 ```
 
-You want to look user's tweet and tweet id, you run below command.
+You want to look user's tweet and tweet id, input user's screen name after below's command running.
 
 ```
-:TweetLook 'screenname' 'get Tweet count (maximum is 200)'
+:TweetLook
 ```
 
 You want to do retweet, you run below command and input tweet id.
@@ -56,15 +56,15 @@ You want to do retweet, you run below command and input tweet id.
 :RT
 ```
 
-You want to do favorite, you run below command and input tweet id
+You want to do favorite, you run below command and input tweet id.
 
 ```
 :Favo
 ```
 
-** If you feel to spicy to write tweet id, you can copy and paste! **
+**If you feel to spicy to write tweet id, you can copy and paste!**
 
-Please run this command after yank tweet id
+Please run this command after yank tweet id.
 
 ```
 <C-R>"
