@@ -7,7 +7,6 @@ function! Tweet#Post() abort
     try
         let post_url = 'https://api.twitter.com/1.1/statuses/update.json'
         let ret = webapi#oauth#post(post_url, s:Oauth(), {}, {'status': s:returnTweet()})
-        echo ''
         if ret['status'] == 200
             echo "\n"
             echo 'success!!'
@@ -52,7 +51,8 @@ function! Tweet#Look() abort
         " open buffer
         call Tweet#buffer#new('TimeLine',TLList)
     else
-        echomsg 'error'
+        echo "\n"
+        echo 'error'
     endif
 endfunction
 
