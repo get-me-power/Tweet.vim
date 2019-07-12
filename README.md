@@ -9,6 +9,7 @@ This plugin can tweet from Vim and Neovim
 - [open-browser.vim](https://github.com/tyru/open-browser.vim)
 
 ## Installtion
+
 If you use [dein.vim](https://github.com/Shougo/dein.vim)
 
 ```
@@ -32,23 +33,27 @@ Plug 'kazukazuinaina/Tweet.vim'
 - Retweet
 - Favo
 
-If you want to write sentence to do tweet, do below's command.
+**If you want to write sentence to do tweet, do below's command.**
 
 ```
 :TweetEdit
 ```
 
-You want to do tweet, you run below command.
+**You want to do tweet, you run below command.**
 
 ```
 :Tweet
 ```
+
+![example](./screenshot/Tweet.gif)
 
 You want to look user's tweet and tweet id, input user's screen name after below's command running.
 
 ```
 :TweetLook
 ```
+
+![example](./screenshot/TweetLook.gif)
 
 You want to do retweet, you run below command and input tweet id.
 
