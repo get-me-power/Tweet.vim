@@ -10,6 +10,7 @@ function! Tweet#Post() abort
         if ret['status'] == 200
             echo "\n"
             echo 'success!!'
+            bdelete ~/test.txt
         else
             echoerr 'error'
         endif
