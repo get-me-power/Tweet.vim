@@ -12,13 +12,17 @@ This plugin can tweet from Vim and Neovim
 
 If you use [dein.vim](https://github.com/Shougo/dein.vim)
 
-```
+```viml
+call dein#add('tyru/open-browser.vim')
+call dein#add('mattn/webapi-vim')
 call dein#add('kazukazuinaina/Tweet.vim')
 ```
 
 If you use [Vim-plug](https://github.com/junegunn/vim-plug)
 
-```
+```viml
+Plug 'tyru/open-browser.vim'
+Plug 'mattn/webapi-vim'
 Plug 'kazukazuinaina/Tweet.vim'
 ```
 
